@@ -1,4 +1,4 @@
-# Java exercises from my uni course
+# Java exercises
 
 Exercises I did to practice my Java skills.
 
