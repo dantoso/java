@@ -1,6 +1,6 @@
 # Java exercises from my uni course
 
-Exercises I used to practice my Java skills.
+Exercises I did to practice my Java skills.
 
 ## Concurrent merge sort
 
