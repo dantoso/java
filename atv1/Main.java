@@ -1,7 +1,7 @@
 package atv1;
 import java.util.Random;
 
-public class Sorter {
+public class Main {
 
     public static void main(String[] args) {
         int len = 100;
