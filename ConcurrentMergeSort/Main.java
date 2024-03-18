@@ -9,13 +9,7 @@ public class Main {
         print(list);
 
         MergeSortThread sortThread = new MergeSortThread(list);
-        sortThread.start();
-
-        try {
-            sortThread.join();
-        } catch(InterruptedException exception) {
-            System.out.println(sortThread.getName() + " was interrupted");
-        }
+        sortThread.run();
 
         if(sortThread.isSorted()) {
             System.out.println();
