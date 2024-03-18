@@ -4,7 +4,8 @@ import java.util.Random;
 public class Sorter {
 
     public static void main(String[] args) {
-        int[] list = generateNumList(5);
+        int len = 100;
+        int[] list = generateNumList(len);
         print(list);
 
         MergeSortThread sortThread = new MergeSortThread(list);
@@ -17,6 +18,7 @@ public class Sorter {
         }
 
         if(sortThread.isSorted()) {
+            System.out.println();
             print(sortThread.getArray());
         } else {
             System.out.println("Program ended with isSorted = false");

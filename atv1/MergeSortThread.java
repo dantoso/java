@@ -44,8 +44,6 @@ public class MergeSortThread extends Thread {
             array = merge(leftThread.getArray(), rightThread.getArray());
             isSorted = true;
         }
-
-        Sorter.print(array);
     }
 
     int[] createSubArray(int startIdx, int endIdx) {
