@@ -1,4 +1,4 @@
-package atv1;
+package ConcurrentMergeSort;
 import java.util.Random;
 
 public class Main {

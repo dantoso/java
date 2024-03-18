@@ -1,4 +1,4 @@
-package atv1;
+package ConcurrentMergeSort;
 
 public class MergeSortThread extends Thread {
     private int[] array;
