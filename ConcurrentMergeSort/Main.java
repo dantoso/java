@@ -4,16 +4,28 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
-        int len = 100;
+        // maximum is 5999
+        int len = 300;
         int[] list = generateNumList(len);
-        print(list);
+
+        if(len > 300) {
+            System.out.println("processing...");
+        } else {
+            print(list);
+        }
 
         MergeSortThread sortThread = new MergeSortThread(list);
         sortThread.run();
 
         if(sortThread.isSorted()) {
             System.out.println();
-            print(sortThread.getArray());
+
+            if(len > 300) {
+                System.out.println("done");
+            } else {
+                print(sortThread.getArray());
+            }
+
         } else {
             System.out.println("Program ended with isSorted = false");
         }
