@@ -1,33 +1,33 @@
 package ConcurrentMergeSort;
 
 public class MergeSortThread extends Thread {
-    private int[] array;
-    private boolean isSorted = false;
+    private int[] list;
+    private int[] result = null;
+    private int startIdx, endIdx;
 
-    public MergeSortThread(int[] array) {
-        this.array = array;
+    public MergeSortThread(int[] list, int startIdx, int endIdx) {
+        this.list = list;
+        this.startIdx = startIdx;
+        this.endIdx = endIdx;
     }
 
-    public int[] getArray() {
-        return array;
+    public int[] getResult() {
+        return result;
     }
 
     public boolean isSorted() {
-        return isSorted;
+        return result != null;
     }
 
     public void run() {        
-        if(array.length == 1) {
-            isSorted = true;
+        if(startIdx == endIdx) {
+            result = createSubArray();
             return;
         }
 
-        int midIdx = (array.length - 1)/2;
-        int[] left = createSubArray(0, midIdx);
-        int[] right = createSubArray(midIdx+1, array.length-1);
-
-        MergeSortThread leftThread = new MergeSortThread(left);
-        MergeSortThread rightThread = new MergeSortThread(right);
+        int midIdx = (startIdx + endIdx)/2;
+        MergeSortThread leftThread = new MergeSortThread(list, startIdx, midIdx);
+        MergeSortThread rightThread = new MergeSortThread(list, midIdx+1, endIdx);
 
         leftThread.start();
         rightThread.start();
@@ -41,16 +41,15 @@ public class MergeSortThread extends Thread {
         }
 
         if(leftThread.isSorted() && rightThread.isSorted()) {
-            array = merge(leftThread.getArray(), rightThread.getArray());
-            isSorted = true;
+            result = merge(leftThread.getResult(), rightThread.getResult());
         }
     }
 
-    int[] createSubArray(int startIdx, int endIdx) {
+    int[] createSubArray() {
         int[] subArray = new int[endIdx - startIdx + 1];
         int index = 0;
         for(int i = startIdx; i <= endIdx; i++) {
-            subArray[index] = array[i];
+            subArray[index] = list[i];
             index++;
         }
 
