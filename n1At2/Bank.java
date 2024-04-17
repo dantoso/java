@@ -14,7 +14,7 @@ public class Bank {
         return key;
     }
 
-    public float getAccBalance(String key) {
+    public float getAccFunds(String key) {
         Account acc = accounts.get(key);
 
         if(acc == null) {

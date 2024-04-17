@@ -3,7 +3,7 @@ package n1At2;
 public class Account {
     private float money;
 
-    public float getMoney() {
+    public float getFunds() {
         return money;
     }
 
@@ -17,7 +17,7 @@ public class Account {
             money = 0;
             return retrieval;
         }
-        
+
         money -= value;
         return value;
     }
