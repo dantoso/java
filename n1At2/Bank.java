@@ -4,11 +4,11 @@ import java.util.HashMap;
 public class Bank {
     private HashMap<String, Account> accounts = new HashMap<String, Account>();
 
-    public String createNewAcc() {
-        int size = accounts.size();
+    public String createNewAcc(AccountHolder owner, float startingFunds) {
+        int size = accounts.size() + 1;
         String key = Integer.toString(size);
 
-        Account newAcc = new Account();
+        Account newAcc = new Account(owner, startingFunds);
         accounts.put(key, newAcc);
         
         return key;
@@ -38,7 +38,11 @@ public class Bank {
         }
 
         toAcc.deposit(retrieval);
-        
+
+        // notify acc holders
+        fromAcc.getHolder().didChangeFundsTo(fromAcc.getFunds());
+        toAcc.getHolder().didChangeFundsTo(toAcc.getFunds());
+
         return null;
     }
 }

@@ -1,30 +1,41 @@
 package n1At2;
 
 public class Account {
-    private float money;
+    private AccountHolder holder;
+    private float funds;
+
+    public Account(AccountHolder holder, float startingFunds) {
+        this.holder = holder;
+        this.funds = startingFunds;
+    }
+
+    public AccountHolder getHolder() {
+        return holder;
+    }
 
     public float getFunds() {
-        return money;
+        return funds;
     }
 
     public void deposit(float value) {
-        money += value;
+        funds += value;
     }
 
     public float retrieve(float value) {
-        if(money - value < 0) {
-            float retrieval = money;
-            money = 0;
+        if(funds - value < 0) {
+            float retrieval = funds;
+            funds = 0;
             return retrieval;
         }
 
-        money -= value;
+        funds -= value;
+
         return value;
     }
 
     public float retrieveAll() {
-        float value = money;
-        money = 0;
+        float value = funds;
+        funds = 0;
         return value;
     }
 }
