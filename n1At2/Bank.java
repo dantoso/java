@@ -33,6 +33,7 @@ public class Bank {
 
         float retrieval = fromAcc.retrieve(amount);
         if(retrieval < amount) {
+            fromAcc.deposit(retrieval);
             return TransferError.notEnoughFunds;
         }
 
