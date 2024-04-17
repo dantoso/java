@@ -2,9 +2,9 @@ package n1At2;
 
 public class Account {
     private AccountHolder holder;
-    private float funds;
+    private double funds;
 
-    public Account(AccountHolder holder, float startingFunds) {
+    public Account(AccountHolder holder, double startingFunds) {
         this.holder = holder;
         this.funds = startingFunds;
     }
@@ -13,17 +13,17 @@ public class Account {
         return holder;
     }
 
-    public float getFunds() {
+    public double getFunds() {
         return funds;
     }
 
-    public void deposit(float value) {
+    public void deposit(double value) {
         funds += value;
     }
 
-    public float retrieve(float value) {
+    public double retrieve(double value) {
         if(funds - value < 0) {
-            float retrieval = funds;
+            double retrieval = funds;
             funds = 0;
             return retrieval;
         }
@@ -33,8 +33,8 @@ public class Account {
         return value;
     }
 
-    public float retrieveAll() {
-        float value = funds;
+    public double retrieveAll() {
+        double value = funds;
         funds = 0;
         return value;
     }
