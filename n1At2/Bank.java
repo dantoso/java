@@ -21,7 +21,7 @@ public class Bank {
             return 0;
         }
 
-        return acc.getMoney();
+        return acc.getFunds();
     }
 
     public TransferError transfer(float amount, String fromKey, String toKey) {
