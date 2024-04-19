@@ -5,6 +5,8 @@ public class Store implements AccountHolder {
     private String accKey;
     private Staff staff[] = new Staff[2];
 
+    private int staffToReceive = 0;
+
     public Store() {
         createAcc();
         for(int i = 0; i<2; i++) {
@@ -16,9 +18,13 @@ public class Store implements AccountHolder {
     public String getAccKey() { return accKey; }
 
     private void paySalaries() {
-        for(int i = 0; i<staff.length; i++) {
-            String staffKey = staff[i].getSalaryKey();
-            Bank.singleton.transfer(salaryValue, this.accKey, staffKey);
+        String staffKey = staff[staffToReceive].getSalaryKey();
+        Bank.singleton.transfer(salaryValue, this.accKey, staffKey);
+
+        if(staffToReceive >= staff.length - 1) {
+            staffToReceive = 0;
+        } else {
+            staffToReceive++;
         }
     }
 
@@ -29,7 +35,7 @@ public class Store implements AccountHolder {
     @Override
     public void didChangeFundsTo(double newValue, String accKey) {
         System.out.println(holderID() + " REMAINING FUNDS: " + newValue);
-        if(newValue >= salaryValue * staff.length) {
+        if(newValue >= salaryValue) {
            paySalaries();
         }
     }

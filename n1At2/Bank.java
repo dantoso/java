@@ -41,14 +41,14 @@ public class Bank {
 
         toAcc.deposit(retrieval);
 
+        printTransfer(retrieval, fromAcc.getHolder(), toAcc.getHolder());
+
         // notify acc holders
         fromAcc.getHolder().didTransferFunds(amount, fromKey);
         fromAcc.getHolder().didChangeFundsTo(fromAcc.getFunds(), fromKey);
         
         toAcc.getHolder().didReceiveFunds(retrieval, toKey);
         toAcc.getHolder().didChangeFundsTo(toAcc.getFunds(), toKey);
-
-        printTransfer(retrieval, fromAcc.getHolder(), toAcc.getHolder());
     }
 
     private void printTransfer(double value, AccountHolder fromHolder, AccountHolder toHolder) {

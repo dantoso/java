@@ -4,17 +4,15 @@ public class Staff extends Thread implements AccountHolder {
     private String salaryAccKey = null;
     private String investmentAccKey = null;
 
-    private String receivedKey;
     private double depoistValue;
+    private boolean hasStarted = false;
 
     public Staff() {
         createAccs();
     }
 
     public void run() {
-        if(receivedKey.equals(salaryAccKey)) {
-            invest(depoistValue);
-        }
+        invest(depoistValue);
     }
 
     private void createAccs() {
@@ -35,13 +33,22 @@ public class Staff extends Thread implements AccountHolder {
     }
 
     @Override
-    public void didChangeFundsTo(double newValue, String accKey) { return; }
+    public void didChangeFundsTo(double newValue, String accKey) { 
+        System.out.println(holderID() + " REMAINING FUNDS: " + newValue);
+    }
 
     @Override
     public void didReceiveFunds(double deposit, String accKey) {
-        depoistValue = deposit;
-        receivedKey = accKey;
-        start();
+        if(accKey.equals(salaryAccKey)) {
+            depoistValue = deposit;
+            
+            if(hasStarted) {
+                run();
+            } else {
+                start();
+            }
+            
+        }
     }
 
     @Override
