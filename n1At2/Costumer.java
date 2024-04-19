@@ -1,7 +1,5 @@
 package n1At2;
 
-import javax.swing.text.Style;
-
 public class Costumer extends Thread implements AccountHolder {
     private String accKey = null;
     private boolean looping = true;
