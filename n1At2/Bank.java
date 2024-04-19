@@ -12,7 +12,7 @@ public class Bank {
 
         Account newAcc = new Account(owner, startingFunds);
         accounts.put(key, newAcc);
-        
+
         return key;
     }
 
@@ -47,5 +47,16 @@ public class Bank {
         
         toAcc.getHolder().didReceiveFunds(retrieval, toKey);
         toAcc.getHolder().didChangeFundsTo(toAcc.getFunds(), toKey);
+
+        printTransfer(retrieval, fromAcc.getHolder(), toAcc.getHolder());
+    }
+
+    private void printTransfer(double value, AccountHolder fromHolder, AccountHolder toHolder) {
+        System.out.println(" ===================== TRANSFER DONE =====================");
+        System.out.println();
+        System.out.println("FROM " + fromHolder.holderID() + " TO " + toHolder.holderID());
+        System.out.println("VALUE: " + value);
+        System.out.println();
+        System.out.println(" =========================================================");
     }
 }

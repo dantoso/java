@@ -38,4 +38,7 @@ public class Store implements AccountHolder {
 
     @Override
     public void didTransferFunds(double transfer, String accKey) { return; }
+
+    @Override
+    public String holderID() { return "Store " + accKey; }
 }

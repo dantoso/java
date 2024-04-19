@@ -46,4 +46,7 @@ public class Staff extends Thread implements AccountHolder {
 
     @Override
     public void didTransferFunds(double transfer, String accKey) { return; }
+
+    @Override
+    public String holderID() { return "Staff " + salaryAccKey; }
 }
