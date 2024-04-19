@@ -23,11 +23,12 @@ public class Store implements AccountHolder {
     }
 
     private void createAcc() {
-        Bank.singleton.createNewAcc(this, 0);
+        accKey = Bank.singleton.createNewAcc(this, 0);
     }
 
     @Override
     public void didChangeFundsTo(double newValue, String accKey) {
+        System.out.println(holderID() + " REMAINING FUNDS: " + newValue);
         if(newValue >= salaryValue * staff.length) {
            paySalaries();
         }

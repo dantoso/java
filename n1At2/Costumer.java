@@ -1,5 +1,7 @@
 package n1At2;
 
+import javax.swing.text.Style;
+
 public class Costumer extends Thread implements AccountHolder {
     private String accKey = null;
     private boolean looping = true;
@@ -17,7 +19,7 @@ public class Costumer extends Thread implements AccountHolder {
         Store store = stores[currentStoreIdx];
         Bank.singleton.transfer(100, accKey, store.getAccKey());
 
-        if(currentStoreIdx >= stores.length) {
+        if(currentStoreIdx >= stores.length - 1) {
             currentStoreIdx = 0;
         } else {
             currentStoreIdx++;
@@ -36,6 +38,7 @@ public class Costumer extends Thread implements AccountHolder {
 
     @Override
     public void didChangeFundsTo(double newValue, String accKey) {
+        System.out.println(holderID() + " REMAINING FUNDS: " + newValue);
         looping = newValue > 0;
     }
 

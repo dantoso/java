@@ -56,7 +56,5 @@ public class Bank {
         System.out.println();
         System.out.println("FROM " + fromHolder.holderID() + " TO " + toHolder.holderID());
         System.out.println("VALUE: " + value);
-        System.out.println();
-        System.out.println(" =========================================================");
     }
 }
