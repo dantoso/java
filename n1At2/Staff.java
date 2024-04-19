@@ -1,12 +1,33 @@
 package n1At2;
 
-public class Staff implements AccountHolder {
-    private String salaryAccKey;
-    private String investmentAccKey;
+public class Staff extends Thread implements AccountHolder {
+    private String salaryAccKey = null;
+    private String investmentAccKey = null;
 
-    public String getSalaryKey() {
-        return salaryAccKey;
+    private String receivedKey;
+    private double depoistValue;
+
+    public Staff() {
+        createAccs();
     }
+
+    public void run() {
+        if(receivedKey.equals(salaryAccKey)) {
+            invest(depoistValue);
+        }
+    }
+
+    private void createAccs() {
+        if(salaryAccKey == null) {
+            salaryAccKey = Bank.singleton.createNewAcc(this, 0);
+        }
+
+        if(investmentAccKey == null) {
+            investmentAccKey = Bank.singleton.createNewAcc(this, 0);
+        }
+    }
+
+    public String getSalaryKey() { return salaryAccKey; }
 
     private void invest(double salary) {
         double investment = salary * 0.2;
@@ -18,9 +39,9 @@ public class Staff implements AccountHolder {
 
     @Override
     public void didReceiveFunds(double deposit, String accKey) {
-        if(accKey.equals(salaryAccKey)) {
-            invest(deposit);
-        }
+        depoistValue = deposit;
+        receivedKey = accKey;
+        start();
     }
 
     @Override

@@ -6,17 +6,24 @@ public class Store implements AccountHolder {
     private Staff staff[] = new Staff[2];
 
     public Store() {
+        createAcc();
         for(int i = 0; i<2; i++) {
             Staff worker = new Staff();
             staff[i] = worker;
         }
     }
 
+    public String getAccKey() { return accKey; }
+
     private void paySalaries() {
         for(int i = 0; i<staff.length; i++) {
             String staffKey = staff[i].getSalaryKey();
             Bank.singleton.transfer(salaryValue, this.accKey, staffKey);
         }
+    }
+
+    private void createAcc() {
+        Bank.singleton.createNewAcc(this, 0);
     }
 
     @Override

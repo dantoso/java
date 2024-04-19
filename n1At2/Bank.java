@@ -6,7 +6,7 @@ public class Bank {
 
     public static Bank singleton = new Bank();
 
-    public String createNewAcc(AccountHolder owner, double startingFunds) {
+    public synchronized String createNewAcc(AccountHolder owner, double startingFunds) {
         int size = accounts.size() + 1;
         String key = Integer.toString(size);
 
@@ -26,7 +26,7 @@ public class Bank {
         return acc.getFunds();
     }
 
-    public void transfer(double amount, String fromKey, String toKey) {
+    public synchronized void transfer(double amount, String fromKey, String toKey) {
         Account fromAcc = accounts.get(fromKey);
         Account toAcc = accounts.get(toKey);
         if(fromAcc == null || toAcc == null) {
