@@ -14,8 +14,10 @@ public class Main {
             costumers[i] = new Costumer(stores);
         }
 
-        print(stores);
-        print(costumers);
+        Bank.singleton.printInitialValues();
+        System.out.println("==================================================================");
+        System.out.println(" EACH STAFF NEEDS 2 ACCOUNTS, 1 FOR SALARY, ANOTHER FOR INVESTMENT");
+        System.out.println("==================================================================");
 
         for(int i = 0; i < costumers.length; i++) {
             costumers[i].start();
