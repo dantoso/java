@@ -46,6 +46,7 @@ public class Staff extends Thread implements AccountHolder {
                 run();
             } else {
                 start();
+                hasStarted = true;
             }
             
         }
