@@ -27,8 +27,10 @@ public class Server {
 
             System.out.println("Connection established");
 
-            sendData();
-            waitForResponse();
+            while(true) {
+                sendData();
+                waitForResponse();   
+            }
 
         } catch(Exception e) {
             System.out.println("Server failed to start");
@@ -77,8 +79,6 @@ public class Server {
         newList[list.length] = newBook;
 
         saveFile(newList);
-        sendData();
-        System.out.println("Novo livro registrado, rode o programa novamente ou veja as mudancas em " + filename);
     }
 
     private void rentBook(String data) {
@@ -89,7 +89,6 @@ public class Server {
         list[index].takeCopies(1);
 
         saveFile(list);
-        System.out.println("Livro alugado, rode o programa novamente ou veja as mudancas em " + filename);
     }
 
     private void returnBook(String data) {
@@ -100,7 +99,6 @@ public class Server {
         list[index].returnCopies(1);
 
         saveFile(list);
-        System.out.println("Livro devolvido, rode o programa novamente ou veja as mudancas em " + filename);
     }
 
     private void sendData() {

@@ -2,7 +2,6 @@ package N2At3;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 public class ClientUI {
     private ClientService service;
@@ -14,9 +13,10 @@ public class ClientUI {
 
     public void start() {
         service.start();
-        Book[] books = service.getAllBooks();
-        booksCache = books;
-        showBookList(books);
+        booksCache = service.getAllBooks();
+        while(true) {
+            showBookList(booksCache);
+        }
     }
 
     private void showBookList(Book[] books) {
@@ -57,12 +57,14 @@ public class ClientUI {
         String input = readString();
 
         switch(input) {
-            case "A", "a":
-                rentBook(index);
-                break;
             case "D", "d":
                 returnBook(index);
                 break;
+            case "A", "a":
+            if(book.getNumCopies() > 0) {
+                rentBook(index);
+                break;
+            }
             default:
                 showBookList(booksCache);
                 break;
@@ -77,27 +79,22 @@ public class ClientUI {
         print("Digite o genero: ");
         String theme = readString();
         print("Digite o numero de exemplares disponiveis: ");
-        int numCopies = readInt();
+        int numCopies = Integer.parseInt(readString());
 
         Book newBook = new Book(author, title, theme, numCopies);
 
         service.registerNewBook(newBook);
+        booksCache = service.getAllBooks();
     }
 
     private void rentBook(int index) {
         service.rent(index);
+        booksCache = service.getAllBooks();
     }
 
     private void returnBook(int index) {
         service.returnBook(index);
-    }
-
-    private int readInt() {
-        Scanner input = new Scanner(System.in);
-        int num = input.nextInt();
-        input.close();
-
-        return num;
+        booksCache = service.getAllBooks();
     }
 
     private String readString() {
